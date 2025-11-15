@@ -14,7 +14,7 @@ import logging
 from pathlib import Path
 
 from app.config import settings
-from app.routers import udc, api, auth, tools, command_center, deploy
+from app.routers import udc, api, auth, tools, command_center, deploy, system_status, money
 from app.routers.auth import get_current_user
 from app.services.registry_client import registry_client
 
@@ -113,10 +113,12 @@ templates = Jinja2Templates(directory=str(templates_path))
 # Include routers
 app.include_router(udc.router, tags=["UDC"])
 app.include_router(api.router, tags=["API"])
+app.include_router(system_status.router, tags=["System Status"])
 app.include_router(auth.router, tags=["Auth"])
 app.include_router(tools.router, tags=["Tools"])
 app.include_router(command_center.router, prefix="/api/command-center", tags=["Command Center"])
 app.include_router(deploy.router, tags=["Deploy"])
+app.include_router(money.router, tags=["Money"])
 
 
 # Web Routes
