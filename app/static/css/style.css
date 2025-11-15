@@ -20,11 +20,11 @@
     --dark-surface-elevated: #222840;
     --glass-bg: rgba(26, 31, 53, 0.7);
 
-    /* Text Colors */
-    --text-color: #f8fafc;
-    --light-text: #e2e8f0;
-    --muted-text: #94a3b8;
-    --ultra-muted: #64748b;
+    /* Text Colors - Enhanced Contrast */
+    --text-color: #ffffff;
+    --light-text: #f1f5f9;
+    --muted-text: #cbd5e1;
+    --ultra-muted: #94a3b8;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--info-color) 100%);
@@ -99,7 +99,8 @@ h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
 p {
     line-height: 1.7;
-    color: var(--light-text);
+    color: #e2e8f0;
+    font-weight: 400;
 }
 
 /* Selection styling */
@@ -170,9 +171,9 @@ nav li {
 }
 
 nav a {
-    color: var(--light-text);
+    color: #f1f5f9;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.95rem;
     padding: 0.5rem 1rem;
     border-radius: var(--radius-sm);
@@ -193,8 +194,8 @@ nav a::after {
 }
 
 nav a:hover {
-    color: var(--primary-color);
-    background: rgba(100, 255, 218, 0.08);
+    color: #ffffff;
+    background: rgba(100, 255, 218, 0.15);
 }
 
 nav a:hover::after {
@@ -307,7 +308,9 @@ nav a.active {
 
 .btn-primary {
     background: var(--gradient-primary);
-    color: var(--dark-bg);
+    color: #0a0e1a;
+    font-weight: 700;
+    text-shadow: none;
     box-shadow: var(--shadow-md), var(--shadow-glow);
     animation: fadeInUp 0.8s ease-out 0.6s both;
 }
@@ -323,8 +326,9 @@ nav a.active {
 
 .btn-secondary {
     background: var(--dark-surface-elevated);
-    color: var(--light-text);
-    border: 2px solid rgba(100, 255, 218, 0.2);
+    color: #ffffff;
+    font-weight: 600;
+    border: 2px solid rgba(100, 255, 218, 0.3);
     box-shadow: var(--shadow-sm);
 }
 
@@ -380,6 +384,8 @@ section h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     text-align: center;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 /* Grid */
