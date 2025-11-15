@@ -9,7 +9,7 @@ from typing import Optional, Dict, Any
 import os
 from datetime import datetime
 import anthropic
-from ..database import get_all_users, get_db_connection
+from ..database import get_db
 
 router = APIRouter()
 
@@ -81,7 +81,7 @@ async def get_stats():
     """
     Get current system stats for dashboards
     """
-    conn = get_db_connection()
+    conn = get_db()
     cursor = conn.cursor()
 
     # Get total members
@@ -106,7 +106,7 @@ async def get_stats():
 
 async def get_system_context() -> str:
     """Build current system context for AI"""
-    conn = get_db_connection()
+    conn = get_db()
     cursor = conn.cursor()
 
     # Get member count
