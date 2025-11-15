@@ -284,9 +284,9 @@
             <h2>🤖 Claude API Usage & Costs</h2>
             <div class="bar-chart">
                 <div class="bar-item">
-                    <div class="bar-label">Sessions Run</div>
+                    <div class="bar-label">Active Sessions</div>
                     <div class="bar-container">
-                        <div class="bar-fill" id="sessions-bar" style="width: 0%;">
+                        <div class="bar-fill" id="sessions-bar" style="width: 0%; background: linear-gradient(90deg, #10b981, #34d399);">
                             <span id="sessions-count">0</span> sessions
                         </div>
                     </div>
@@ -298,6 +298,19 @@
                             $<span id="claude-cost">0</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Session Breakdown -->
+        <div class="chart">
+            <h2>⚡ Live Session Breakdown</h2>
+            <div style="color: #aaa; margin-bottom: 15px; font-size: 0.9em;">
+                Real-time tracking of active Claude Code sessions
+            </div>
+            <div id="sessions-list">
+                <div style="text-align: center; color: #666; padding: 20px;">
+                    Loading session data...
                 </div>
             </div>
         </div>
@@ -346,18 +359,67 @@
                 document.getElementById('proj-m6').textContent = data.projections.projected_revenue_m6;
 
                 // Update Claude costs
-                document.getElementById('sessions-count').textContent = data.costs.claude_api.sessions_run;
+                const activeSessions = data.metrics.active_sessions || data.costs.claude_api.sessions_run;
+                document.getElementById('sessions-count').textContent = activeSessions;
                 document.getElementById('claude-cost').textContent = data.metrics.claude_cost.toFixed(2);
 
-                const sessionsPercent = Math.min((data.costs.claude_api.sessions_run / 50) * 100, 100);
+                const sessionsPercent = Math.min((activeSessions / 20) * 100, 100);
                 document.getElementById('sessions-bar').style.width = sessionsPercent + '%';
 
-                const costPercent = Math.min((data.metrics.claude_cost / 5) * 100, 100);
+                const costPercent = Math.min((data.metrics.claude_cost / 2) * 100, 100);
                 document.getElementById('claude-cost-bar').style.width = costPercent + '%';
+
+                // Update session breakdown
+                updateSessionBreakdown(data.metrics.session_breakdown || []);
 
             } catch (error) {
                 console.error('Error updating dashboard:', error);
             }
+        }
+
+        function updateSessionBreakdown(sessions) {
+            const container = document.getElementById('sessions-list');
+
+            if (!sessions || sessions.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: #666; padding: 20px;">
+                        No active sessions detected
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            sessions.forEach((session, index) => {
+                const sessionCost = 0.02; // $0.02 per session
+                const sessionId = session.id || `session-${index}`;
+                const shortId = sessionId.replace('session-', '').substring(0, 13);
+
+                html += `
+                    <div style="background: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 3px solid #10b981;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="flex: 1;">
+                                <div style="font-weight: bold; color: #10b981; font-size: 0.95em;">
+                                    🤖 ${shortId}
+                                </div>
+                                <div style="color: #aaa; font-size: 0.85em; margin-top: 4px;">
+                                    ${session.work || 'Unknown task'}
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="color: #10b981; font-size: 1.1em; font-weight: bold;">
+                                    $${sessionCost.toFixed(2)}
+                                </div>
+                                <div style="color: #666; font-size: 0.75em;">
+                                    ${session.status || 'active'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
         }
 
         function updateRevenue(revenue) {

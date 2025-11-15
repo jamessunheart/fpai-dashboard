@@ -86,8 +86,42 @@ class TreasuryTracker:
         with open(TREASURY_FILE, 'w') as f:
             json.dump(self.data, f, indent=2)
 
+    def scan_active_sessions(self):
+        """Scan coordination directory for active sessions"""
+        from pathlib import Path as P
+
+        # Use environment-specific path
+        coord_dir = P(os.getenv("COORD_DIR", "/Users/jamessunheart/Development/docs/coordination"))
+        sessions_dir = coord_dir / "sessions"
+
+        if not sessions_dir.exists():
+            return []
+
+        sessions = []
+        for session_file in sessions_dir.glob("*.json"):
+            try:
+                with open(session_file) as f:
+                    session = json.load(f)
+                    sessions.append({
+                        'id': session.get('session_id', session_file.stem),
+                        'work': session.get('current_work', 'unknown'),
+                        'status': session.get('status', 'active')
+                    })
+            except:
+                pass
+
+        return sessions
+
     def calculate_metrics(self):
-        """Calculate financial metrics"""
+        """Calculate financial metrics with real-time session tracking"""
+        # Scan active sessions for live cost tracking
+        active_sessions = self.scan_active_sessions()
+        live_session_count = len(active_sessions)
+
+        # Use live session count if available, otherwise use stored count
+        claude_sessions = live_session_count if live_session_count > 0 else self.data['costs']['claude_api']['sessions_run']
+        claude_cost = claude_sessions * self.data['costs']['claude_api']['per_session']
+
         # Total costs
         total_costs = sum(
             cost.get('total', 0)
@@ -117,10 +151,6 @@ class TreasuryTracker:
         total_investment = sum(self.data['investments'].values())
         roi = ((total_revenue - total_costs) / total_investment * 100) if total_investment > 0 else 0
 
-        # Claude API costs
-        claude_sessions = self.data['costs']['claude_api']['sessions_run']
-        claude_cost = claude_sessions * self.data['costs']['claude_api']['per_session']
-
         return {
             'total_costs': total_costs + claude_cost,
             'total_revenue': total_revenue,
@@ -130,6 +160,8 @@ class TreasuryTracker:
             'runway_months': runway_months,
             'roi': roi,
             'claude_cost': claude_cost,
+            'active_sessions': live_session_count,
+            'session_breakdown': active_sessions,
             'breakeven_clients': monthly_burn / (potential_monthly / 10) if potential_monthly > 0 else 0
         }
 
