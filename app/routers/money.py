@@ -11,8 +11,9 @@ import json
 
 router = APIRouter()
 
-# Treasury data file
-TREASURY_FILE = Path("/Users/jamessunheart/Development/docs/coordination/treasury.json")
+# Treasury data file (works in both local and production environments)
+import os
+TREASURY_FILE = Path(os.getenv("TREASURY_PATH", "/Users/jamessunheart/Development/docs/coordination/treasury.json"))
 
 # Templates
 templates_path = Path(__file__).parent.parent / "templates"
