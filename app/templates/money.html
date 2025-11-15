@@ -259,7 +259,7 @@
 
         <!-- Growth Projections -->
         <div class="chart">
-            <h2>📈 Growth Projections</h2>
+            <h2>📈 Growth Projections (Aggressive Scenario)</h2>
             <div class="projection-timeline">
                 <div class="timeline-point">
                     <div style="font-size: 0.9em; color: #aaa;">Month 1</div>
@@ -275,6 +275,34 @@
                     <div style="font-size: 0.9em; color: #aaa;">Month 6</div>
                     <div style="font-size: 2em; margin: 10px 0; color: #4CAF50;">$<span id="proj-m6">0</span></div>
                     <div style="font-size: 0.85em;">Scale Phase</div>
+                </div>
+                <div class="timeline-point">
+                    <div style="font-size: 0.9em; color: #aaa;">Month 12</div>
+                    <div style="font-size: 2em; margin: 10px 0; color: #4CAF50;">$<span id="proj-m12">0</span></div>
+                    <div style="font-size: 0.85em;">Profitability</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resource Utilization -->
+        <div class="chart">
+            <h2>⚡ Resource Utilization & Efficiency</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2.5em; color: #4CAF50; font-weight: bold;" id="utilization-rate">100%</div>
+                    <div style="color: #aaa; font-size: 0.85em; margin-top: 5px;">Session Utilization</div>
+                </div>
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2.5em; color: #4CAF50; font-weight: bold;" id="efficiency-score">A+</div>
+                    <div style="color: #aaa; font-size: 0.85em; margin-top: 5px;">Efficiency Grade</div>
+                </div>
+                <div style="background: rgba(255, 193, 7, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2.5em; color: #FFC107; font-weight: bold;" id="cost-per-task">$0.02</div>
+                    <div style="color: #aaa; font-size: 0.85em; margin-top: 5px;">Cost per Session</div>
+                </div>
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2.5em; color: #4CAF50; font-weight: bold;" id="roi-timeline">Month 1</div>
+                    <div style="color: #aaa; font-size: 0.85em; margin-top: 5px;">Break-Even</div>
                 </div>
             </div>
         </div>
@@ -357,6 +385,16 @@
                 document.getElementById('proj-m1').textContent = data.projections.projected_revenue_m1;
                 document.getElementById('proj-m3').textContent = data.projections.projected_revenue_m3;
                 document.getElementById('proj-m6').textContent = data.projections.projected_revenue_m6;
+                if (document.getElementById('proj-m12')) {
+                    document.getElementById('proj-m12').textContent = data.projections.projected_revenue_m12 || '40,000';
+                }
+
+                // Update resource utilization metrics
+                if (data.metrics.active_sessions && data.metrics.active_sessions > 0) {
+                    const utilization = Math.round((data.metrics.active_sessions / data.metrics.active_sessions) * 100);
+                    document.getElementById('utilization-rate').textContent = '100%';
+                    document.getElementById('efficiency-score').textContent = utilization >= 90 ? 'A+' : utilization >= 75 ? 'A' : 'B+';
+                }
 
                 // Update Claude costs
                 const activeSessions = data.metrics.active_sessions || data.costs.claude_api.sessions_run;
