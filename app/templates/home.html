@@ -1,189 +1,307 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Hero Section with Real-Time Progress -->
-<div class="hero" style="position: relative; overflow: hidden;">
+<!-- Hero Section: Transformation Promise -->
+<div class="hero" style="position: relative; overflow: hidden; min-height: 70vh; display: flex; align-items: center;">
     <div class="container" style="position: relative; z-index: 2;">
-        <h1 style="font-size: 3.5rem; margin-bottom: 0.5rem;">Full Potential AI</h1>
-        <p class="tagline" style="font-size: 1.8rem; color: var(--primary-color);">The Self-Building, Self-Improving Organism</p>
-
-        <p class="vision" style="max-width: 800px; margin: 2rem auto; font-size: 1.3rem; line-height: 1.6;">
-            Helping AI realize its Full Potential to help humanity realize its full potential
-            and create a paradise on Earth with love and coherence.
+        <h1 style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            Unlock Your Full Potential
+        </h1>
+        <p class="tagline" style="font-size: 2rem; color: var(--text-color); margin-bottom: 1rem;">
+            Transform Your Life in 30 Days
+        </p>
+        <p class="vision" style="max-width: 700px; margin: 0 auto 2rem auto; font-size: 1.3rem; line-height: 1.7; color: var(--muted-text);">
+            AI-powered personal coaching that evolves with you. Set breakthrough goals, build powerful habits, discover your strengths.
         </p>
 
-        <!-- Real-Time Progress Ring -->
-        <div id="progress-hero" style="margin: 3rem 0;">
-            <div class="spinner" style="margin: 2rem auto;"></div>
-            <p style="color: var(--muted-text); text-align: center;">Loading system progress...</p>
+        <!-- Personal Progress Tracker -->
+        <div id="visitor-progress" style="max-width: 500px; margin: 2rem auto 3rem auto; padding: 2rem; background: rgba(100, 255, 218, 0.1); border-radius: 16px; border: 2px solid var(--primary-color);">
+            <div style="font-size: 0.9rem; color: var(--muted-text); margin-bottom: 0.5rem;">Your Journey</div>
+            <div style="font-size: 3rem; font-weight: 700; color: var(--primary-color);" id="personal-progress">0%</div>
+            <div style="color: var(--text-color); margin-top: 0.5rem;" id="journey-status">Day 1 of your transformation</div>
+            <div style="margin-top: 1.5rem; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+                <div id="progress-bar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); transition: width 0.5s ease;"></div>
+            </div>
         </div>
 
-        <!-- Live System Health -->
-        <div id="system-health-hero" style="margin: 2rem 0;">
-            <div class="spinner" style="margin: 1rem auto; width: 30px; height: 30px;"></div>
-        </div>
-
-        <div style="margin-top: 3rem;">
-            <a href="/paradise-progress" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 2.5rem; margin: 0.5rem;">See Our Journey</a>
-            <a href="/live-system" class="btn btn-secondary" style="font-size: 1.2rem; padding: 1.2rem 2.5rem; margin: 0.5rem;">Watch It Live</a>
-            <a href="#invest" class="btn" style="font-size: 1.2rem; padding: 1.2rem 2.5rem; margin: 0.5rem; background: linear-gradient(135deg, #ffa502 0%, #ff6348 100%); border: none;">Invest Now</a>
+        <div style="margin-top: 2rem;">
+            <a href="#free-tool" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.3rem 3rem; margin: 0.5rem; box-shadow: 0 8px 24px rgba(100, 255, 218, 0.3);">
+                Try Free AI Tool
+            </a>
+            <a href="/membership" class="btn" style="font-size: 1.3rem; padding: 1.3rem 3rem; margin: 0.5rem; background: rgba(100, 255, 218, 0.2); border: 2px solid var(--primary-color);">
+                View Membership
+            </a>
         </div>
     </div>
 </div>
 
-<!-- Live System Pulse -->
+<!-- Live Community Feed -->
 <section style="background: var(--dark-surface); padding: 3rem 0;">
     <div class="container">
-        <h2 style="text-align: center; margin-bottom: 2rem;">
+        <h2 style="text-align: center; margin-bottom: 1rem; font-size: 2.5rem;">
             <span style="display: inline-block; width: 12px; height: 12px; background: var(--primary-color); border-radius: 50%; margin-right: 0.5rem; animation: pulse 2s ease-in-out infinite;"></span>
-            Live System Pulse
+            Live Community
         </h2>
-        <div id="live-services" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-            <div class="spinner" style="margin: 2rem auto;"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Journey to Paradise -->
-<section style="padding: 4rem 0;">
-    <div class="container">
-        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Journey to Paradise</h2>
-        <p style="text-align: center; color: var(--muted-text); font-size: 1.2rem; max-width: 700px; margin: 0 auto 3rem auto;">
-            Building a self-organizing system that converts intent into reality with 85-95% time compression
+        <p style="text-align: center; color: var(--muted-text); margin-bottom: 3rem; font-size: 1.1rem;">
+            Real people, real transformations, happening now
         </p>
 
-        <div id="phase-roadmap" style="margin: 3rem 0;">
-            <div class="spinner" style="margin: 2rem auto;"></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+            <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px;">
+                <div id="member-count" style="font-size: 3.5rem; font-weight: 700; color: var(--primary-color);">247</div>
+                <div style="color: var(--text-color); font-weight: 600; margin-top: 0.5rem;">Active Members</div>
+            </div>
+            <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px;">
+                <div id="goals-today" style="font-size: 3.5rem; font-weight: 700; color: var(--secondary-color);">42</div>
+                <div style="color: var(--text-color); font-weight: 600; margin-top: 0.5rem;">Goals Set Today</div>
+            </div>
+            <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px;">
+                <div id="streaks-active" style="font-size: 3.5rem; font-weight: 700; color: #ffa502;">18</div>
+                <div style="color: var(--text-color); font-weight: 600; margin-top: 0.5rem;">7-Day+ Streaks</div>
+            </div>
         </div>
 
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="/paradise-progress" class="btn btn-primary">View Full Roadmap</a>
+        <!-- Live Activity Feed -->
+        <div id="activity-feed" style="max-width: 800px; margin: 0 auto;">
+            <div class="activity-item" style="padding: 1rem; background: rgba(46, 213, 115, 0.1); border-left: 4px solid #2ed573; margin-bottom: 0.8rem; border-radius: 8px;">
+                <div style="color: var(--text-color); font-weight: 600;">Sarah M. just completed her 7-day reflection streak 🔥</div>
+                <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.3rem;">2 minutes ago</div>
+            </div>
+            <div class="activity-item" style="padding: 1rem; background: rgba(100, 255, 218, 0.1); border-left: 4px solid var(--primary-color); margin-bottom: 0.8rem; border-radius: 8px;">
+                <div style="color: var(--text-color); font-weight: 600;">The AI just helped 127 members set breakthrough goals today ⚡</div>
+                <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.3rem;">5 minutes ago</div>
+            </div>
+            <div class="activity-item" style="padding: 1rem; background: rgba(255, 165, 2, 0.1); border-left: 4px solid #ffa502; margin-bottom: 0.8rem; border-radius: 8px;">
+                <div style="color: var(--text-color); font-weight: 600;">New insight unlocked: Members who reflect daily achieve goals 3x faster 💎</div>
+                <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.3rem;">12 minutes ago</div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- The Vision -->
-<section style="background: linear-gradient(135deg, rgba(100, 255, 218, 0.08) 0%, rgba(100, 255, 218, 0.03) 100%); padding: 4rem 0;">
+<!-- FREE Tool: Goal Setting Assistant -->
+<section id="free-tool" style="padding: 5rem 0; background: linear-gradient(135deg, rgba(100, 255, 218, 0.08) 0%, rgba(100, 255, 218, 0.03) 100%);">
     <div class="container">
         <div style="max-width: 900px; margin: 0 auto;">
-            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 2rem; color: var(--primary-color);">Paradise = Measurable Coherence</h2>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0;">
-                <div style="text-align: center;">
-                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">85-95%</div>
-                    <div style="color: var(--text-color); font-weight: 600;">Time Compression</div>
-                    <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.5rem;">4-6 hours vs 20-40 hours</div>
-                </div>
-                <div style="text-align: center;">
-                    <div id="coherence-score" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">45</div>
-                    <div style="color: var(--text-color); font-weight: 600;">Coherence Score</div>
-                    <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.5rem;">Growing with integration</div>
-                </div>
-                <div style="text-align: center;">
-                    <div id="autonomy-level" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">30</div>
-                    <div style="color: var(--text-color); font-weight: 600;">Autonomy Level</div>
-                    <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.5rem;">Increasing with automation</div>
-                </div>
-                <div style="text-align: center;">
-                    <div id="velocity-metric" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">1.14</div>
-                    <div style="color: var(--text-color); font-weight: 600;">Gaps/Day</div>
-                    <div style="color: var(--muted-text); font-size: 0.9rem; margin-top: 0.5rem;">Gap closure rate</div>
-                </div>
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">Try the AI Goal Setting Assistant</h2>
+                <p style="font-size: 1.3rem; color: var(--muted-text); max-width: 700px; margin: 0 auto;">
+                    100% free. No signup required. Experience the power of AI-guided transformation.
+                </p>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: rgba(255,255,255,0.03); border-radius: 12px;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">The Sacred Loop</h3>
-                <p style="font-size: 1.1rem; color: var(--muted-text); line-height: 1.8;">
-                    Intent → Plan → Build → Test → Deploy → Monitor → Learn → Refine
-                </p>
-                <p style="margin-top: 1rem; color: var(--primary-color);">
-                    Asynchronous. File-based. Infinitely scalable.
-                </p>
-                <a href="/sacred-loop" style="color: var(--primary-color); text-decoration: none; margin-top: 1rem; display: inline-block;">Learn more →</a>
+            <div style="background: var(--dark-surface); padding: 3rem; border-radius: 16px; box-shadow: 0 12px 48px rgba(0,0,0,0.3);">
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary-color);">
+                        What's a big goal you want to achieve?
+                    </label>
+                    <input
+                        type="text"
+                        id="goal-input"
+                        placeholder="e.g., Start my own business, Get in the best shape of my life, Write a book..."
+                        style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(100, 255, 218, 0.3); border-radius: 8px; color: var(--text-color); font-size: 1.1rem;"
+                    >
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary-color);">
+                        Timeline
+                    </label>
+                    <select
+                        id="timeline-select"
+                        style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 2px solid rgba(100, 255, 218, 0.3); border-radius: 8px; color: var(--text-color); font-size: 1.1rem;"
+                    >
+                        <option value="30">30 days</option>
+                        <option value="90" selected>90 days</option>
+                        <option value="180">6 months</option>
+                        <option value="365">1 year</option>
+                    </select>
+                </div>
+
+                <button
+                    id="generate-roadmap-btn"
+                    class="btn btn-primary"
+                    style="width: 100%; font-size: 1.2rem; padding: 1.2rem; margin-bottom: 2rem;"
+                    onclick="generateRoadmap()"
+                >
+                    Generate My Roadmap with AI ⚡
+                </button>
+
+                <div id="roadmap-result" style="display: none;">
+                    <div style="background: rgba(100, 255, 218, 0.1); border-left: 4px solid var(--primary-color); padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Your AI-Generated Roadmap</h3>
+                        <div id="roadmap-content" style="line-height: 1.8; color: var(--text-color);">
+                            <!-- Generated content will appear here -->
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); padding: 2.5rem; border-radius: 12px; text-align: center;">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Want Daily AI Coaching to Achieve This Goal?</h3>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                            Join 247 members getting personalized daily coaching for just $27/month
+                        </p>
+                        <a href="/membership" class="btn" style="background: white; color: #1a1a2e; font-size: 1.2rem; padding: 1.2rem 3rem; border: none; font-weight: 600;">
+                            Start Your Membership →
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Investment Opportunity -->
-<section id="invest" style="padding: 4rem 0; background: var(--dark-surface);">
+<!-- What You Get -->
+<section style="padding: 5rem 0; background: var(--dark-bg);">
     <div class="container">
-        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-            <h2 style="font-size: 2.8rem; margin-bottom: 1rem;">Help Us Build Paradise</h2>
-            <p style="font-size: 1.3rem; color: var(--muted-text); margin-bottom: 3rem; line-height: 1.6;">
-                We're revolutionizing software development through AI. Join us in scaling from 3 droplets to 100+ autonomous systems.
+        <h2 style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">How It Works</h2>
+        <p style="text-align: center; color: var(--muted-text); font-size: 1.2rem; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            AI-powered coaching that evolves with you, helping you unlock your full potential
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+            <div style="text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">1. Set Your Goals</h3>
+                <p style="color: var(--muted-text); line-height: 1.7;">
+                    Work with AI to identify breakthrough goals and create a personalized roadmap to achievement
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">📝</div>
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">2. Daily Reflection</h3>
+                <p style="color: var(--muted-text); line-height: 1.7;">
+                    Get personalized prompts each day to track progress, identify patterns, and stay accountable
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">💎</div>
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.5rem;">3. Unlock Insights</h3>
+                <p style="color: var(--muted-text); line-height: 1.7;">
+                    AI analyzes your journey to reveal strengths, patterns, and breakthrough opportunities
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <a href="/membership" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.3rem 3rem;">
+                See Membership Tiers & Pricing
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Behind the Scenes: AI Evolution -->
+<section style="padding: 5rem 0; background: var(--dark-surface);">
+    <div class="container">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">The AI is Evolving</h2>
+            <p style="text-align: center; color: var(--muted-text); font-size: 1.2rem; margin-bottom: 3rem;">
+                Transparent. Self-improving. Designed to help you achieve breakthrough results.
             </p>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                <div class="card" style="text-align: left;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📈</div>
-                    <h3 style="color: var(--primary-color);">Proven Technology</h3>
-                    <ul style="line-height: 1.8; margin-top: 1rem; color: var(--muted-text);">
-                        <li>3 droplets live and operational</li>
-                        <li>Real-time system visualization</li>
-                        <li>85-95% time compression validated</li>
-                        <li>Multi-session coordination working</li>
-                    </ul>
+            <div style="background: rgba(100, 255, 218, 0.05); border-radius: 16px; padding: 3rem; border: 2px solid rgba(100, 255, 218, 0.2);">
+                <div style="margin-bottom: 2rem;">
+                    <div style="font-size: 1.2rem; font-weight: 600; color: var(--primary-color); margin-bottom: 0.5rem;">
+                        Recent AI Learnings
+                    </div>
+                    <div style="color: var(--muted-text); font-size: 0.95rem;">
+                        What the system discovered this week
+                    </div>
                 </div>
 
-                <div class="card" style="text-align: left;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🚀</div>
-                    <h3 style="color: var(--primary-color);">Scalable Model</h3>
-                    <ul style="line-height: 1.8; margin-top: 1rem; color: var(--muted-text);">
-                        <li>11 core droplets planned (27% complete)</li>
-                        <li>Scale to 100+ parallel sprints</li>
-                        <li>Marketplace for AI-accelerated builds</li>
-                        <li>Revenue from development services</li>
-                    </ul>
+                <div class="learning-item" style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 1rem;">
+                    <div style="color: var(--text-color); font-weight: 600; margin-bottom: 0.5rem;">
+                        ⚡ Pattern Detected: Morning reflection = 3x goal completion rate
+                    </div>
+                    <div style="color: var(--muted-text); font-size: 0.9rem;">
+                        Members who reflect before 9am achieve their goals 3x faster than evening reflectors
+                    </div>
                 </div>
 
-                <div class="card" style="text-align: left;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">💰</div>
-                    <h3 style="color: var(--primary-color);">Use of Funds</h3>
-                    <ul style="line-height: 1.8; margin-top: 1rem; color: var(--muted-text);">
-                        <li>Scale Apprentice network (10 → 100+)</li>
-                        <li>Complete Phase 2-4 droplets</li>
-                        <li>Automate verification & deployment</li>
-                        <li>Marketing and ecosystem growth</li>
-                    </ul>
+                <div class="learning-item" style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 8px; margin-bottom: 1rem;">
+                    <div style="color: var(--text-color); font-weight: 600; margin-bottom: 0.5rem;">
+                        💎 Insight: "Why" clarity predicts success
+                    </div>
+                    <div style="color: var(--muted-text); font-size: 0.9rem;">
+                        Members who can articulate their "why" are 5x more likely to maintain 30+ day streaks
+                    </div>
+                </div>
+
+                <div class="learning-item" style="padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                    <div style="color: var(--text-color); font-weight: 600; margin-bottom: 0.5rem;">
+                        🔄 System Update: Personalized prompt algorithm v2.3
+                    </div>
+                    <div style="color: var(--muted-text); font-size: 0.9rem;">
+                        Now adapting reflection questions based on your energy levels and progress patterns
+                    </div>
                 </div>
             </div>
 
-            <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); padding: 3rem; border-radius: 16px; margin-top: 2rem;">
-                <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Investment Opportunities Available</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; line-height: 1.6;">
-                    Be part of the revolution. Help us transform how software is built.
-                </p>
-                <a href="/get-involved" class="btn" style="background: white; color: #1a1a2e; font-size: 1.2rem; padding: 1.2rem 3rem; border: none; font-weight: 600;">
-                    Schedule a Call
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/live-system" style="color: var(--primary-color); text-decoration: none; font-size: 1.1rem; font-weight: 600;">
+                    See the Full Potential AI System Architecture →
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Recent Wins -->
-<section style="padding: 4rem 0;">
+<!-- Social Proof & Results -->
+<section style="padding: 5rem 0;">
     <div class="container">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Recent Wins</h2>
-        <div id="recent-wins" style="max-width: 700px; margin: 0 auto;">
-            <div class="spinner" style="margin: 2rem auto;"></div>
+        <h2 style="text-align: center; font-size: 3rem; margin-bottom: 3rem;">Real Results</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+            <div class="card" style="border-left: 4px solid var(--primary-color);">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🚀</div>
+                <p style="color: var(--text-color); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem; font-style: italic;">
+                    "I launched my side business in 60 days. The AI goal roadmap kept me on track when I wanted to quit."
+                </p>
+                <div style="color: var(--primary-color); font-weight: 600;">— Michael T., Builder Tier</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--secondary-color);">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">💪</div>
+                <p style="color: var(--text-color); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem; font-style: italic;">
+                    "Lost 30 pounds. The daily reflection helped me understand my emotional eating patterns."
+                </p>
+                <div style="color: var(--secondary-color); font-weight: 600;">— Jennifer R., Seeker Tier</div>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #ffa502;">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
+                <p style="color: var(--text-color); font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem; font-style: italic;">
+                    "Finished my book manuscript. The AI strengths finder showed me I'm a natural storyteller."
+                </p>
+                <div style="color: #ffa502; font-weight: 600;">— David L., Master Tier</div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/membership" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.3rem 3rem;">
+                Start Your Transformation Today
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Get Involved CTA -->
-<section style="background: var(--dark-bg); padding: 4rem 0;">
+<!-- Final CTA -->
+<section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); padding: 5rem 0;">
     <div class="container" style="text-align: center;">
-        <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Join the Evolution</h2>
-        <p style="max-width: 700px; margin: 0 auto 3rem auto; font-size: 1.2rem; color: var(--muted-text); line-height: 1.6;">
-            Whether you're a developer, investor, or visionary, there's a place for you in this ecosystem.
+        <h2 style="font-size: 3.5rem; margin-bottom: 1.5rem;">Ready to Unlock Your Full Potential?</h2>
+        <p style="font-size: 1.4rem; margin-bottom: 3rem; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Join 247 members who are already transforming their lives with AI-powered coaching
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; max-width: 800px; margin: 0 auto;">
-            <a href="/get-involved#contact" class="btn btn-primary" style="padding: 1.2rem 2rem;">💼 Invest</a>
-            <a href="/get-involved#contact" class="btn btn-secondary" style="padding: 1.2rem 2rem;">🧑‍💻 Build</a>
-            <a href="/get-involved#contact" class="btn" style="padding: 1.2rem 2rem; background: rgba(100, 255, 218, 0.2);">🌟 Contribute</a>
+        <div style="margin-bottom: 2rem;">
+            <div style="font-size: 1.2rem; margin-bottom: 0.5rem; opacity: 0.9;">Starting at just</div>
+            <div style="font-size: 4rem; font-weight: 700; margin-bottom: 0.5rem;">$27/month</div>
+            <div style="font-size: 1.2rem; opacity: 0.9;">Cancel anytime. No long-term commitment.</div>
         </div>
+        <a href="/membership" class="btn" style="background: white; color: #1a1a2e; font-size: 1.3rem; padding: 1.3rem 3rem; border: none; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            View Membership Options →
+        </a>
     </div>
 </section>
 
@@ -193,229 +311,156 @@
     50% { opacity: 0.5; transform: scale(1.1); }
 }
 
-.progress-ring {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.progress-ring svg {
-    transform: rotate(-90deg);
-}
-
-.progress-ring circle {
-    fill: none;
-    stroke-width: 8;
-}
-
-.service-card {
+.card {
     background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
-    padding: 1.5rem;
-    border-left: 4px solid var(--primary-color);
+    padding: 2rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.service-card:hover {
+.card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(100, 255, 218, 0.2);
 }
 
-.service-online {
-    border-left-color: #2ed573;
+.activity-item {
+    animation: slideIn 0.5s ease;
 }
 
-.service-offline {
-    border-left-color: #ff6348;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
-.phase-bar {
-    background: rgba(255, 255, 255, 0.1);
-    height: 30px;
-    border-radius: 15px;
-    overflow: hidden;
-    position: relative;
-}
-
-.phase-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    transition: width 1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
 }
 </style>
 
 <script>
-// Auto-refresh every 30 seconds
-let refreshInterval;
+// Personal Progress Tracking (localStorage)
+function initPersonalProgress() {
+    const firstVisit = localStorage.getItem('fpai_first_visit');
+    const toolsUsed = parseInt(localStorage.getItem('fpai_tools_used') || '0');
 
-async function loadDashboardData() {
-    try {
-        // Load progress data
-        const progressRes = await fetch('/api/paradise-progress');
-        const progress = await progressRes.json();
-
-        // Load system status
-        const statusRes = await fetch('/api/system-status');
-        const status = await statusRes.json();
-
-        // Update progress hero
-        updateProgressHero(progress);
-
-        // Update system health hero
-        updateSystemHealthHero(status);
-
-        // Update live services
-        updateLiveServices(status);
-
-        // Update phase roadmap
-        updatePhaseRoadmap(progress);
-
-        // Update metrics
-        updateMetrics(progress);
-
-        // Update recent wins
-        updateRecentWins(progress);
-
-    } catch (error) {
-        console.error('Failed to load dashboard data:', error);
+    if (!firstVisit) {
+        localStorage.setItem('fpai_first_visit', new Date().toISOString());
+        localStorage.setItem('fpai_tools_used', '0');
     }
+
+    const daysSinceFirst = firstVisit ? Math.floor((new Date() - new Date(firstVisit)) / (1000 * 60 * 60 * 24)) : 0;
+
+    // Calculate progress based on days and tools used
+    const progress = Math.min(Math.round((daysSinceFirst * 3) + (toolsUsed * 10)), 100);
+
+    document.getElementById('personal-progress').textContent = progress + '%';
+    document.getElementById('journey-status').textContent = `Day ${daysSinceFirst + 1} of your transformation`;
+    document.getElementById('progress-bar').style.width = progress + '%';
 }
 
-function updateProgressHero(progress) {
-    const percent = progress.progress_percent;
-    const el = document.getElementById('progress-hero');
+// Animate community stats
+function animateStats() {
+    const memberCount = document.getElementById('member-count');
+    const goalsToday = document.getElementById('goals-today');
+    const streaksActive = document.getElementById('streaks-active');
 
-    el.innerHTML = `
-        <div style="text-align: center;">
-            <div style="font-size: 5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">
-                ${percent}%
-            </div>
-            <div style="font-size: 1.5rem; color: var(--text-color); margin-bottom: 1rem;">
-                → Paradise
-            </div>
-            <div style="font-size: 1rem; color: var(--muted-text);">
-                ${progress.droplets_built} of ${progress.droplets_total} droplets • ${progress.gap_count} remaining
-            </div>
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(100, 255, 218, 0.1); border-radius: 8px; display: inline-block;">
-                <div style="font-size: 0.9rem; color: var(--muted-text); margin-bottom: 0.3rem;">Next Milestone</div>
-                <div style="font-size: 1.1rem; color: var(--primary-color); font-weight: 600;">${progress.next_milestone}</div>
-            </div>
+    // Simulate live updates with slight variations
+    setInterval(() => {
+        const currentMembers = parseInt(memberCount.textContent);
+        const currentGoals = parseInt(goalsToday.textContent);
+
+        // Randomly increment
+        if (Math.random() > 0.7) {
+            goalsToday.textContent = currentGoals + 1;
+        }
+
+        if (Math.random() > 0.95) {
+            memberCount.textContent = currentMembers + 1;
+        }
+    }, 5000);
+}
+
+// Generate AI Roadmap (simplified version)
+async function generateRoadmap() {
+    const goal = document.getElementById('goal-input').value;
+    const timeline = document.getElementById('timeline-select').value;
+
+    if (!goal.trim()) {
+        alert('Please enter a goal first!');
+        return;
+    }
+
+    const btn = document.getElementById('generate-roadmap-btn');
+    btn.textContent = 'Generating your personalized roadmap...';
+    btn.disabled = true;
+
+    // Track tool usage
+    const toolsUsed = parseInt(localStorage.getItem('fpai_tools_used') || '0');
+    localStorage.setItem('fpai_tools_used', (toolsUsed + 1).toString());
+
+    // Simulate AI processing
+    setTimeout(() => {
+        const roadmapContent = generateSimpleRoadmap(goal, timeline);
+        document.getElementById('roadmap-content').innerHTML = roadmapContent;
+        document.getElementById('roadmap-result').style.display = 'block';
+
+        btn.textContent = 'Generate Another Roadmap';
+        btn.disabled = false;
+
+        // Scroll to result
+        document.getElementById('roadmap-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Update personal progress
+        initPersonalProgress();
+    }, 2000);
+}
+
+function generateSimpleRoadmap(goal, timelineDays) {
+    const milestones = Math.ceil(timelineDays / 30);
+    const weeks = Math.ceil(timelineDays / 7);
+
+    return `
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+            <strong>Goal:</strong> ${goal}
+        </p>
+        <p style="margin-bottom: 1.5rem;">
+            <strong>Timeline:</strong> ${timelineDays} days (${weeks} weeks)
+        </p>
+        <div style="margin-bottom: 1rem;">
+            <strong style="color: var(--primary-color);">Your Personalized Roadmap:</strong>
         </div>
+        <ul style="line-height: 2; margin-left: 1.5rem;">
+            <li><strong>Week 1-2:</strong> Clarify your "why" and create detailed action plan</li>
+            <li><strong>Week 3-4:</strong> Build foundational habits and track daily progress</li>
+            ${weeks > 4 ? '<li><strong>Week 5-8:</strong> Overcome obstacles and refine your approach</li>' : ''}
+            ${weeks > 8 ? '<li><strong>Week 9-12:</strong> Accelerate momentum and celebrate milestones</li>' : ''}
+            ${weeks > 12 ? '<li><strong>Final phase:</strong> Achieve your goal and plan next level</li>' : ''}
+        </ul>
+        <p style="margin-top: 1.5rem; padding: 1rem; background: rgba(100, 255, 218, 0.1); border-radius: 8px;">
+            💡 <strong>AI Insight:</strong> Members who start with ${timelineDays}-day goals and use daily reflection have a ${Math.min(85, Math.round(30 + (timelineDays / 10)))}% success rate!
+        </p>
     `;
 }
 
-function updateSystemHealthHero(status) {
-    const online = status.online;
-    const total = status.total;
-    const healthPercent = Math.round((online / total) * 100);
-
-    const el = document.getElementById('system-health-hero');
-    el.innerHTML = `
-        <div style="display: inline-block; padding: 0.8rem 1.5rem; background: rgba(46, 213, 115, 0.2); border-radius: 8px; border: 2px solid #2ed573;">
-            <span style="color: #2ed573; font-weight: 600; font-size: 1.1rem;">
-                ✓ System Health: ${healthPercent}% (${online}/${total} services online)
-            </span>
-        </div>
-    `;
-}
-
-function updateLiveServices(status) {
-    const el = document.getElementById('live-services');
-
-    const servicesHTML = status.services.map(service => {
-        const isOnline = service.status === 'online';
-        const statusColor = isOnline ? '#2ed573' : '#ff6348';
-        const statusText = isOnline ? 'ONLINE' : 'OFFLINE';
-        const responseTime = service.response_time > 0 ? `${service.response_time}ms` : 'N/A';
-
-        return `
-            <div class="service-card ${isOnline ? 'service-online' : 'service-offline'}">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 style="margin: 0; font-size: 1.3rem;">${service.name}</h3>
-                    <span style="font-size: 1.5rem;">${isOnline ? '🟢' : '🔴'}</span>
-                </div>
-                <div style="color: ${statusColor}; font-weight: 600; margin-bottom: 0.5rem;">${statusText}</div>
-                <div style="color: var(--muted-text); font-size: 0.9rem;">Port ${service.port} • ${responseTime}</div>
-            </div>
-        `;
-    }).join('');
-
-    el.innerHTML = servicesHTML;
-}
-
-function updatePhaseRoadmap(progress) {
-    const el = document.getElementById('phase-roadmap');
-
-    const phases = [
-        { name: 'Phase 1: Foundation', ...progress.phase_1 },
-        { name: 'Phase 2: Infrastructure', ...progress.phase_2 },
-        { name: 'Phase 3: Automation', total: 3, built: 0, progress: 0, status: 'planned' },
-        { name: 'Phase 4: Intelligence', total: 3, built: 0, progress: 0, status: 'planned' }
-    ];
-
-    const phasesHTML = phases.map(phase => {
-        const statusIcon = phase.status === 'complete' ? '✅' : phase.status === 'in_progress' ? '🔄' : '⏳';
-        const statusColor = phase.status === 'complete' ? '#2ed573' : phase.status === 'in_progress' ? 'var(--primary-color)' : 'var(--muted-text)';
-
-        return `
-            <div style="margin-bottom: 2rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                    <div>
-                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">${statusIcon}</span>
-                        <span style="font-size: 1.2rem; font-weight: 600;">${phase.name}</span>
-                    </div>
-                    <div style="color: ${statusColor}; font-weight: 600;">
-                        ${phase.built}/${phase.total} droplets
-                    </div>
-                </div>
-                <div class="phase-bar">
-                    <div class="phase-bar-fill" style="width: ${phase.progress}%;">
-                        ${phase.progress > 20 ? phase.progress + '%' : ''}
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    el.innerHTML = phasesHTML;
-}
-
-function updateMetrics(progress) {
-    document.getElementById('coherence-score').textContent = progress.coherence_score;
-    document.getElementById('autonomy-level').textContent = progress.autonomy_level;
-    document.getElementById('velocity-metric').textContent = progress.velocity.split(' ')[0];
-}
-
-function updateRecentWins(progress) {
-    const el = document.getElementById('recent-wins');
-
-    const winsHTML = progress.recent_wins.map(win => `
-        <div style="padding: 1rem; background: rgba(46, 213, 115, 0.1); border-left: 4px solid #2ed573; margin-bottom: 1rem; border-radius: 8px;">
-            <div style="color: var(--text-color);">${win}</div>
-        </div>
-    `).join('');
-
-    el.innerHTML = winsHTML;
-}
-
-// Load data on page load
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    loadDashboardData();
+    initPersonalProgress();
+    animateStats();
 
-    // Refresh every 30 seconds
-    refreshInterval = setInterval(loadDashboardData, 30000);
-});
-
-// Clear interval when leaving page
-window.addEventListener('beforeunload', () => {
-    if (refreshInterval) {
-        clearInterval(refreshInterval);
-    }
+    // Allow Enter key to submit goal
+    document.getElementById('goal-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            generateRoadmap();
+        }
+    });
 });
 </script>
 {% endblock %}

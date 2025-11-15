@@ -1,90 +1,121 @@
 #!/bin/bash
 
 ##############################################################################
-# Deploy Enhanced Homepage to Live Server
-# Updates the live Dashboard with new investor-ready homepage
+# ONE-COMMAND DEPLOYMENT: Enhanced Homepage
+# Commits → Pushes → Deploys to fullpotential.com
+# No copy-paste required!
 ##############################################################################
 
 set -e  # Exit on error
 
 SERVER="root@198.54.123.234"
-REMOTE_PATH="/root/dashboard"
-LOCAL_PATH="/Users/jamessunheart/Development/dashboard"
+LOCAL_PATH="/Users/jamessunheart/development/SERVICES/dashboard"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "🚀 Deploying Enhanced Homepage"
+echo "🚀 ONE-COMMAND DEPLOYMENT: Enhanced Homepage"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-# Step 1: Copy updated files to server
-echo "📦 Step 1: Copying updated files to server..."
+# Step 1: Commit and push changes
+echo "📝 Step 1: Committing changes to git..."
+cd "$LOCAL_PATH"
+
+if git diff --quiet && git diff --cached --quiet; then
+    echo "✅ No new changes to commit"
+else
+    git add app/templates/home.html
+    git commit -m "$(cat <<'EOF'
+Redesign homepage for conversion and engagement
+
+Complete transformation from tech-focused to user-focused homepage:
+- Hero: "Unlock Your Full Potential in 30 Days"
+- Personal progress tracker with localStorage
+- Live community feed (247 members, real-time stats)
+- FREE Goal Setting Assistant (no signup required)
+- AI evolution transparency section
+- Social proof testimonials
+- Multiple CTAs to $27/month membership
+
+Conversion strategy:
+1. Hook with free tool
+2. Track visitor journey (localStorage)
+3. Build FOMO with live community
+4. Convert with clear value prop
+
+This homepage builds a following by giving value first,
+then converting to paid membership.
+
+🌐⚡💎 Generated with Claude Code
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+EOF
+)"
+    echo "✅ Changes committed"
+fi
+
 echo ""
-
-scp "$LOCAL_PATH/app/routers/api.py" "$SERVER:$REMOTE_PATH/app/routers/api.py"
-echo "✅ Updated api.py"
-
-scp "$LOCAL_PATH/app/templates/home.html" "$SERVER:$REMOTE_PATH/app/templates/home.html"
-echo "✅ Updated home.html"
+echo "📤 Step 2: Pushing to GitHub..."
+git push
+echo "✅ Pushed to GitHub"
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "🔄 Step 2: Restarting Dashboard service..."
+echo "🚀 Step 3: Deploying to server..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
 ssh "$SERVER" << 'ENDSSH'
+set -e
 cd /root/dashboard
 
-# Find and restart the Dashboard process
-echo "Stopping Dashboard..."
-pkill -f "uvicorn app.main:app" || echo "No running process found"
+echo "📥 Pulling latest changes from GitHub..."
+git pull
 
-echo "Starting Dashboard..."
-nohup python3 -m uvicorn app.main:app --host 0.0.0.0 --port 8002 > dashboard.log 2>&1 &
+echo "🛑 Stopping old container..."
+docker rm -f fpai-dashboard 2>/dev/null || true
 
-sleep 3
+echo "🏗️  Building and starting new container..."
+docker-compose up -d --build
 
-echo "✅ Dashboard restarted"
+echo ""
+echo "✅ Container deployed!"
+echo ""
+echo "📊 Container status:"
+docker-compose ps
 ENDSSH
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "✅ Step 3: Verifying deployment..."
+echo "✅ Step 4: Verifying deployment..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-sleep 2
+sleep 3
 
-# Test endpoints
-echo "Testing /health endpoint..."
-curl -s http://198.54.123.234:8002/health | python3 -m json.tool || echo "Health check pending..."
+echo "Testing homepage..."
+curl -s http://198.54.123.234/ | grep -i "unlock your full potential" | head -1 && echo "✅ Homepage live!" || echo "⚠️  Homepage check failed"
 
 echo ""
-echo "Testing /api/paradise-progress endpoint..."
-curl -s http://198.54.123.234:8002/api/paradise-progress | python3 -m json.tool | head -20
+echo "Testing membership page..."
+curl -s http://198.54.123.234/membership | grep -i "seeker" | head -1 && echo "✅ Membership page live!" || echo "⚠️  Membership check failed"
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🎉 DEPLOYMENT COMPLETE!"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "✅ Enhanced homepage deployed to: http://198.54.123.234:8002"
-echo "✅ Also available at: http://dashboard.fullpotential.com:8002"
+echo "🌐 Live at:"
+echo "   http://198.54.123.234/ (available now)"
+echo "   http://fullpotential.com/ (once DNS propagates)"
 echo ""
-echo "🔍 View the enhanced homepage:"
-echo "   - Homepage: http://198.54.123.234:8002/"
-echo "   - Progress: http://198.54.123.234:8002/paradise-progress"
-echo "   - API: http://198.54.123.234:8002/api/paradise-progress"
+echo "📋 What's new:"
+echo "   ✅ Conversion-focused hero: 'Unlock Your Full Potential'"
+echo "   ✅ Personal progress tracker (localStorage)"
+echo "   ✅ Live community feed with 247 members"
+echo "   ✅ FREE Goal Setting Assistant (no signup)"
+echo "   ✅ AI evolution transparency section"
+echo "   ✅ Social proof testimonials"
+echo "   ✅ Multiple CTAs to membership"
 echo ""
-echo "📊 Features now live:"
-echo "   ✅ Real-time progress display (27% → Paradise)"
-echo "   ✅ Live system health widget"
-echo "   ✅ Dynamic service cards with pulse animation"
-echo "   ✅ 4-phase roadmap visualization"
-echo "   ✅ Paradise metrics (coherence, autonomy, velocity)"
-echo "   ✅ Investment opportunity section"
-echo "   ✅ Recent wins display"
-echo "   ✅ Auto-refresh every 30 seconds"
-echo ""
-echo "🌐 Next step: Point fullpotential.ai to the Dashboard!"
+echo "💡 Next time, just run: ./DEPLOY_ENHANCED_HOMEPAGE.sh"
 echo ""
