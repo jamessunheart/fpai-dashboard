@@ -14,7 +14,7 @@ import logging
 from pathlib import Path
 
 from app.config import settings
-from app.routers import udc, api, auth, tools
+from app.routers import udc, api, auth, tools, command_center
 from app.routers.auth import get_current_user
 from app.services.registry_client import registry_client
 
@@ -115,6 +115,7 @@ app.include_router(udc.router, tags=["UDC"])
 app.include_router(api.router, tags=["API"])
 app.include_router(auth.router, tags=["Auth"])
 app.include_router(tools.router, tags=["Tools"])
+app.include_router(command_center.router, prefix="/api/command-center", tags=["Command Center"])
 
 
 # Web Routes
@@ -194,6 +195,15 @@ async def dashboard(request: Request):
         "request": request,
         "title": "Dashboard - Full Potential",
         "user": user
+    })
+
+
+@app.get("/command-center", response_class=HTMLResponse)
+async def command_center_page(request: Request):
+    """AI Command Center - Interactive operations dashboard"""
+    return templates.TemplateResponse("command-center.html", {
+        "request": request,
+        "title": "Command Center - Full Potential AI"
     })
 
 
